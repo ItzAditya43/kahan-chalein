@@ -94,11 +94,12 @@
         n.removeAttribute('data-pending');
         if (!w) { n.remove(); return; }
         n.classList.toggle('bad', w.some(d => d.rain >= 60 || d.max >= 38));
+        const note = w.every(d => d.rain >= 70) ? 'Rain most of the weekend. Pack for it, or pick another place.'
+          : w.some(d => d.max >= 38) ? 'Very hot. Plan for early mornings and late evenings.' : '';
         n.replaceChildren(el('span', { class: 'wx-k', textContent: 'This weekend' }),
           ...w.map(d => el('span', { class: 'wx-d' }, el('b', { textContent: `${d.label} ${d.max}°` }),
             ` ${d.words}${d.rain >= 30 ? `, ${d.rain}% rain` : ''}`)),
-          w.every(d => d.rain >= 70) ? el('span', { class: 'wx-note', textContent: 'Rain most of the weekend. Pack for it, or pick another place.' })
-            : w.some(d => d.max >= 38) ? el('span', { class: 'wx-note', textContent: 'Very hot. Plan for early mornings and late evenings.' }) : null);
+          ...(note ? [el('span', { class: 'wx-note', textContent: note })] : []));
       });
     }).catch(() => pending().forEach(n => n.remove()));
   }
