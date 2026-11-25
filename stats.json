@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-25T19:43:22+00:00",
+ "updated": "2026-11-25T20:05:22+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 30,
- "events": 16,
+ "visitors": 34,
+ "events": 19,
  "daily": [
   {
    "day": "2026-11-24",
@@ -17,14 +17,14 @@
   },
   {
    "day": "2026-11-26",
-   "visitors": 7,
-   "events": 4
+   "visitors": 11,
+   "events": 7
   }
  ],
  "counts": {
-  "best_open": 3,
-  "tab_find": 2,
-  "tab_group": 2,
+  "tab_find": 3,
+  "tab_group": 3,
+  "best_open": 4,
   "searches": 5,
   "split_open": 1,
   "hostel": 1,
@@ -49,6 +49,9 @@
  "places": {
   "hampi": {
    "best_open": 2
+  },
+  "gandikota": {
+   "best_open": 1
   },
   "jaipur": {
    "best_open": 1
