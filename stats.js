@@ -174,6 +174,8 @@
     const pick = key => Object.fromEntries(Object.entries(P).map(([id, v]) => [id, v[key] || 0]));
     const sizes = Object.entries(d.group_sizes || {}).filter(([k]) => /^\d+$/.test(k));
     const people = sizes.reduce((s, [k, n]) => s + k * n, 0), plans = sizes.reduce((s, [, n]) => s + n, 0);
+    const used = { 'This weekend\'s best bets': c.best_open, 'Surprise me': c.surprise, 'Split the cost': c.split_open,
+      'Near me': c.near_me, 'Add to calendar': c.calendar, 'Wrong info? reports': c.fix };
     $('#bento').replaceChildren(
       card('s3', 'Leaving from', 'Searches by city', rows(d.city, cityName, { limit: 4 })),
       card('s3', 'Mood', 'What they asked for', rows(d.vibe, vibeName, { sea: true, limit: 4 })),
@@ -186,6 +188,7 @@
           el('div', {}, el('b', { textContent: fmt(c.group_started) }), el('span', { textContent: 'started' })),
           el('div', {}, el('b', { textContent: fmt(c.group_joined) }), el('span', { textContent: 'joined' })),
           el('div', {}, el('b', { textContent: plans ? (people / plans).toFixed(1) : '–' }), el('span', { textContent: 'per plan' })))),
+      card('', 'Features used', 'Taps per feature', rows(used, x => x, { sea: true, limit: 6 })),
     );
     document.querySelectorAll('.card').forEach(n => n.addEventListener('pointermove', e => {
       const r = n.getBoundingClientRect();

@@ -192,6 +192,60 @@
     tally();
   }
 
+  // ---------- the coming weekend (IST), for the calendar and the result image ----------
+  function nextWeekend(days) {
+    const ist = new Date(Date.now() + 5.5 * 3600e3);
+    const dow = ist.getUTCDay();                       // 0 Sun … 6 Sat
+    const sat = new Date(ist.getTime() + (((6 - dow) + 7) % 7) * 864e5);
+    const start = dow === 0 ? ist : sat;               // on a Sunday, "this weekend" is today
+    const end = new Date(start.getTime() + (dow === 0 ? 1 : days) * 864e5); // exclusive
+    const iso = d => d.toISOString().slice(0, 10);
+    const nice = d => d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+    return { start: iso(start), end: iso(end), label: days === 1 || dow === 0 ? nice(start) : `${nice(start)} – ${nice(new Date(end.getTime() - 864e5))}` };
+  }
+
+  function addToCalendar(p) {
+    const w = nextWeekend(g.d);
+    const ymd = s => s.replace(/-/g, '');
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Kahan Chalein//EN', 'BEGIN:VEVENT',
+      `UID:${Date.now()}-${p.id}@kahan-chalein`, `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`,
+      `DTSTART;VALUE=DATE:${ymd(w.start)}`, `DTEND;VALUE=DATE:${ymd(w.end)}`,
+      `SUMMARY:${p.name} trip 🎒`, `DESCRIPTION:Decided on Kahan Chalein? ${link()}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const a = el('a', { href: URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })), download: `${p.id}-trip.ics` });
+    document.body.append(a); a.click(); a.remove();
+    track('group/calendar');
+    toast(`Saved ${w.label}. Open it to add to your calendar.`);
+  }
+
+  // A 1080×1920 image of the group's result, for the group chat or a story.
+  async function resultImage(top, total) {
+    track('group/story');
+    try { await document.fonts.load('800 120px Fraunces'); } catch { /* fallback font is fine */ }
+    const c = document.createElement('canvas'); c.width = 1080; c.height = 1920;
+    const x = c.getContext('2d');
+    x.fillStyle = '#f4eee2'; x.fillRect(0, 0, 1080, 1920);
+    await KC.drawArt(x, top.p, 0, 720);
+    const W = KC.wrapText;
+    x.fillStyle = '#1d1b16'; x.font = '700 34px system-ui, sans-serif';
+    x.fillText('KAHAN CHALEIN?', 90, 810);
+    x.font = '400 56px Fraunces, Georgia, serif';
+    x.fillText(total === 1 ? 'My pick for the weekend:' : top.yes.length === total ? 'The gang matched on' : 'Top match so far:', 90, 900);
+    x.font = '800 132px Fraunces, Georgia, serif';
+    let y = W(x, top.p.name, 90, 1040, 900, 132);
+    x.fillStyle = '#e4572e'; x.font = '700 60px system-ui, sans-serif';
+    y = W(x, total === 1 ? `${CITIES[g.c]} → ${top.p.name}` : `${top.yes.length} of ${total} said yes`, 90, y + 20, 900, 72);
+    x.fillStyle = '#1d1b16'; x.font = '400 44px system-ui, sans-serif';
+    if (total > 1) y = W(x, top.yes.join(' · '), 90, y + 10, 900, 58);
+    y = W(x, `${nextWeekend(g.d).label} · ${KC.hours(top.p.from[g.c][0])} from ${CITIES[g.c]}`, 90, y + 10, 900, 58);
+    x.font = '800 66px Fraunces, Georgia, serif'; x.fillStyle = '#e4572e';
+    x.fillText(total === 1 ? 'Who\'s in? Swipe yours.' : 'Chalo! 🎒', 90, 1700);
+    x.fillStyle = '#6d665a'; x.font = '400 30px system-ui, sans-serif';
+    x.fillText(location.host || 'kahan chalein', 90, 1780);
+    x.font = '400 23px system-ui, sans-serif';
+    x.fillText('Built by Aditya Pandey for the goSTOPS Build Sprint. Not an official goSTOPS product.', 90, 1840);
+    KC.saveCanvas(c, `${top.p.id}-match.png`, 'Saved. Drop it in the group chat.');
+  }
+
   // ---------- 3. where the group matches ----------
   function headline(rows, total) {
     const best = rows[0].yes.length;
@@ -218,7 +272,8 @@
       el('div', { class: 'actions' },
         el('a', { class: 'wa', href: `https://wa.me/?text=${encodeURIComponent(msg + ' ' + link())}`, target: '_blank', rel: 'noopener',
           textContent: 'Send to the group chat', onclick: () => track(`group/share/${total}`) }),
-        el('button', { type: 'button', textContent: 'Copy link', onclick: () => { copy(`${msg} ${link()}`, 'Copied. Paste it in the group.'); track('group/copy'); } })));
+        el('button', { type: 'button', textContent: 'Copy link', onclick: () => { copy(`${msg} ${link()}`, 'Copied. Paste it in the group.'); track('group/copy'); } }),
+        top.yes.length ? el('button', { type: 'button', textContent: 'Result image', onclick: () => resultImage(top, total) }) : null));
 
     const head = solo
       ? el('div', { class: 'g-intro' }, el('h2', { textContent: 'Your picks are in.' }),
@@ -234,7 +289,8 @@
 
     const parts = [head, shareBox];
     if (top.yes.length) {
-      parts.push(el('h3', { class: 'g-h', textContent: solo ? 'Your favourite' : 'Top match' }), KC.ticket(top.p, g.c, 1));
+      parts.push(el('h3', { class: 'g-h', textContent: solo ? 'Your favourite' : 'Top match' }), KC.ticket(top.p, g.c, 1, g.d),
+        el('div', { class: 'g-again' }, el('button', { type: 'button', textContent: `📅 Add ${top.p.name} to my calendar (${nextWeekend(g.d).label})`, onclick: () => addToCalendar(top.p) })));
     }
     parts.push(el('h3', { class: 'g-h', textContent: 'All the votes' }), list);
     if (nobody.length) parts.push(el('p', { class: 'nobody', textContent: `Nobody picked: ${nobody.join(', ')}.` }));

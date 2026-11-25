@@ -189,6 +189,53 @@ legend { float: left; width: 100%; padding: 0; margin-bottom: 8px; font-size: 12
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+/* this weekend's best bets */
+.best { margin: 16px 0 4px; }
+.best:empty { display: none; }
+.best-k { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 8px; }
+.best-wait { font-size: 14px; color: var(--muted); border: 1px dashed var(--line); border-radius: 12px; padding: 12px; margin: 0; }
+.best-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: best; }
+.best-list li { counter-increment: best; }
+.best-list button {
+  width: 100%; text-align: left; cursor: pointer; display: grid; grid-template-columns: auto 1fr; column-gap: 12px;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 14px;
+}
+.best-list button::before { content: counter(best); grid-row: span 3; align-self: center; font-family: Fraunces, Georgia, serif; font-weight: 800; font-size: 26px; color: var(--accent); }
+.best-list button:hover { border-color: var(--ink); }
+.best-list b { font-family: Fraunces, Georgia, serif; font-size: 19px; line-height: 1.2; }
+.best-wx { font-size: 14px; }
+.best-h { font-size: 13px; color: var(--muted); }
+.best-skip { font-size: 13px; color: var(--warn); font-weight: 600; margin: 8px 0 0; }
+.best-act { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 10px; }
+.best-act .wa { font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 10px; padding: 9px 13px; background: var(--wa); color: #fff; }
+.best-note { font-size: 12px; color: var(--muted); }
+
+/* near me, surprise */
+legend .near { float: right; text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 600; color: var(--ink);
+  background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.go-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 18px; }
+.go-row .go { margin-top: 0; }
+.dice { font-weight: 700; font-size: 16px; border-radius: 12px; padding: 0 16px; cursor: pointer; background: transparent; border: 2px solid var(--ink); }
+
+/* split the cost */
+.split { margin: 0 0 14px; border: 1.5px solid var(--line); border-radius: 12px; }
+.split summary { cursor: pointer; padding: 9px 13px; font-weight: 600; font-size: 14px; }
+.split[open] summary { border-bottom: 1px dashed var(--line); }
+.split-in { padding: 10px 13px 13px; }
+.people { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 8px; }
+.people span { margin-right: auto; color: var(--muted); }
+.people output { min-width: 2ch; text-align: center; font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.step { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--line); background: transparent; font-size: 18px; line-height: 1; cursor: pointer; }
+.split-lines { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.split-lines li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--line); }
+.split-lines b { font-variant-numeric: tabular-nums; }
+.split-total { margin: 8px 0 4px; font-size: 15px; }
+.split-note { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+.split .wa { display: inline-block; font-size: 14px; font-weight: 600; text-decoration: none; border-radius: 10px; padding: 9px 13px; background: var(--wa); color: #fff; }
+
+.fixit { display: inline-block; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.stamp.new { color: var(--accent); }
+
 @media (max-width: 420px) {
   .row2 { grid-template-columns: 1fr; }
   .ticket h3, .card h3 { font-size: 26px; }

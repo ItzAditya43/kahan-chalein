@@ -9,6 +9,12 @@ A free page for the "we have the weekend, where do we go?" chat.
   plan and the honest "skip it if".
 - **Decide with friends:** everyone swipes the same 10 trips and the link carries the votes. Send it to the group
   chat and see where you all match.
+- **This weekend's best bets:** the live forecast over every in-season trip from your city: the 3 driest, most
+  comfortable picks, and which places will be rained out.
+- **Split the cost:** a rough budget per person (travel, stay, food, getting around) for any group size, ready to send.
+- **Surprise me**, **Near me** (nearest of the 8 cities, only when you tap), goSTOPS bed prices where they have a
+  hostel, a result image and calendar file for group plans, and a "Wrong info?" link on every trip.
+- **Live numbers:** [stats.html](https://itzaditya43.github.io/kahan-chalein/stats.html), how many people used it.
 
 Plain HTML, CSS and JavaScript, no framework and no backend. Weather from [Open-Meteo](https://open-meteo.com).
 Page counts with [GoatCounter](https://www.goatcounter.com) (no cookies).

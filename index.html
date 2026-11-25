@@ -37,15 +37,19 @@
 
   <section id="find">
     <section id="invite" class="invite" hidden></section>
+    <section id="best" class="best" aria-live="polite"></section>
     <form id="ask" class="ask" autocomplete="off">
-      <fieldset><legend>Leaving from</legend><div class="chips" data-name="from"></div></fieldset>
+      <fieldset><legend>Leaving from <button type="button" class="near" id="near">📍 Near me</button></legend><div class="chips" data-name="from"></div></fieldset>
       <fieldset><legend>Time you've got</legend><div class="chips" data-name="days"></div></fieldset>
       <fieldset><legend>Mood</legend><div class="chips" data-name="vibe"></div></fieldset>
       <div class="row2">
         <fieldset><legend>Going</legend><div class="chips" data-name="who"></div></fieldset>
         <fieldset><legend>Budget</legend><div class="chips" data-name="budget"></div></fieldset>
       </div>
-      <button class="go" type="submit">Show me trips</button>
+      <div class="go-row">
+        <button class="go" type="submit">Show me trips</button>
+        <button class="dice" type="button" id="surprise">🎲 Surprise me</button>
+      </div>
     </form>
     <section id="results" class="results" aria-live="polite"></section>
   </section>
