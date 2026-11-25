@@ -25,54 +25,45 @@
   </div>
 </nav>
 
-<main>
-  <header class="hero wrap">
-    <p class="eyebrow"><i></i><span id="fresh">Loading the latest numbers…</span></p>
-    <h1>Who's actually <em>using it.</em></h1>
-    <p class="lede">Real usage of Kahan Chalein? since it went live on 24 Nov, counted by GoatCounter: no cookies, no personal data.
-      Built for the goSTOPS Build Sprint, which is judged on how many real people used it.</p>
-    <p class="clock mono" id="clock"></p>
+<main class="wrap">
+  <header class="head">
+    <div>
+      <h1>Who's actually <em>using it</em></h1>
+      <p class="lede">Real usage since launch on 24 Nov · counted by GoatCounter, no cookies · goSTOPS Build Sprint</p>
+    </div>
+    <div class="head-r">
+      <p class="eyebrow"><i></i><span id="fresh">Loading…</span></p>
+      <p class="clock mono" id="clock"></p>
+    </div>
   </header>
 
-  <section class="wrap">
-    <div class="stats" id="strip"></div>
-  </section>
+  <div class="stats" id="strip"></div>
 
-  <section class="wrap">
-    <p class="kicker">Day by day</p>
-    <h2>Every day since launch</h2>
+  <div class="duo">
     <div class="card chart-card">
-      <div class="legend" id="legend"></div>
+      <div class="card-top"><h3>Every day</h3><div class="legend" id="legend"></div></div>
       <div class="chart" id="daily" role="img" aria-label="Visitors and actions per day"></div>
-      <details class="table-view"><summary>Show as a table</summary><div id="daily-table"></div></details>
+      <details class="table-view"><summary>Table</summary><div id="daily-table"></div></details>
     </div>
-  </section>
+    <div class="card">
+      <div class="card-top"><h3>From a visit to a plan</h3></div>
+      <ol class="funnel" id="funnel"></ol>
+    </div>
+  </div>
 
-  <section class="wrap">
-    <p class="kicker">The path</p>
-    <h2>From a visit to a plan</h2>
-    <p class="sub">The app is built to spread: each person who shares a trip or starts a group plan brings in friends.</p>
-    <div class="card"><ol class="funnel" id="funnel"></ol></div>
-  </section>
+  <div class="bento" id="bento"></div>
 
-  <section class="wrap">
-    <p class="kicker">What people looked for</p>
-    <h2>Cities, moods and trips</h2>
-    <div class="bento" id="bento"></div>
-  </section>
-
-  <section class="wrap notes">
-    <p class="kicker">How it's counted</p>
-    <h2>Honest notes</h2>
+  <details class="notes">
+    <summary>How it's counted</summary>
     <ul>
       <li><b>People</b> are GoatCounter's unique visitors: one person on one device in a session. Reloading doesn't add one.</li>
-      <li><b>Searches</b> count only when someone picks their own city, time or mood. The picks shown when the page opens are not counted.</li>
+      <li><b>Searches</b> count only when someone picks their own city, time or mood, not the picks shown when the page opens.</li>
       <li><b>Shares</b> are taps on "Send to the group chat", Share, Copy link or Story image. Whether the message was then sent is not known.</li>
       <li><b>Friends brought in</b> are people who opened a link someone sent them: a single trip, or a group plan.</li>
       <li>Some link-preview bots run JavaScript and get counted, so the first few visits on launch day are probably bots.</li>
-      <li>The numbers on this page refresh every few minutes. The full raw data is public on <a href="https://kahanchalein.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>.</li>
+      <li>Refreshes every few minutes. Full raw data is public on <a href="https://kahanchalein.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>.</li>
     </ul>
-  </section>
+  </details>
 </main>
 
 <footer class="foot wrap">

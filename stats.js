@@ -53,17 +53,17 @@
     const c = d.counts;
     const friends = (c.invites_opened || 0) + (c.group_invites_opened || 0);
     const items = [
-      ['lead', d.visitors, 'People who opened it', 'unique visitors since 24 Nov'],
-      ['', c.searches, 'Trip searches', 'picked their own city or mood'],
-      ['', c.shares, 'Shares', 'WhatsApp, story image, links'],
-      ['', friends, 'Friends brought in', 'opened a link a friend sent'],
+      ['lead', d.visitors, 'People', 'unique visitors'],
+      ['', c.searches, 'Trip searches', 'own city or mood'],
+      ['', c.shares, 'Shares', 'WhatsApp, story, links'],
+      ['', friends, 'Friends brought in', 'opened a shared link'],
     ];
     $('#strip').replaceChildren(...items.map(([cls, n, label, small]) =>
       el('div', { class: `stat ${cls}` }, el('b', { textContent: fmt(n) }), el('span', { textContent: label }), el('small', { textContent: small }))));
   }
 
   // ---------- daily chart: grouped bars, one axis ----------
-  const SERIES = [['visitors', 'People', 'var(--mark-1)'], ['events', 'Actions (searches, shares, swipes…)', 'var(--mark-2)']];
+  const SERIES = [['visitors', 'People', 'var(--mark-1)'], ['events', 'Actions', 'var(--mark-2)']];
   function days(d) {
     const byDay = Object.fromEntries(d.daily.map(x => [x.day, x]));
     const out = [];
@@ -90,8 +90,8 @@
     const rows = days(d);
     $('#legend').replaceChildren(...SERIES.map(([, label, color]) => el('span', {}, el('i', { style: `background:${color}` }), label)));
     const box = $('#daily');
-    const W = Math.max(box.clientWidth, 300), H = box.clientHeight || 260;
-    const m = { t: 18, r: 6, b: 28, l: 34 };
+    const W = Math.max(box.clientWidth, 300), H = box.clientHeight || 168;
+    const m = { t: 16, r: 4, b: 22, l: 26 };
     const iw = W - m.l - m.r, ih = H - m.t - m.b;
     const max = niceMax(Math.max(1, ...rows.flatMap(r => [r.visitors, r.events])));
     const y = v => m.t + ih - (v / max) * ih;
@@ -114,10 +114,10 @@
         if (p) g.append(svg('path', { d: p, fill: color }));
       });
       if (r.visitors) { const t = svg('text', { class: 'val', x: cx - bw / 2 - 1, y: y(r.visitors) - 6, 'text-anchor': 'middle' }); t.textContent = fmt(r.visitors); g.append(t); }
-      const lab = svg('text', { x: cx, y: H - 8, 'text-anchor': 'middle', opacity: r.future ? 0.5 : 1 });
+      const lab = svg('text', { x: cx, y: H - 5, 'text-anchor': 'middle', opacity: r.future ? 0.5 : 1 });
       lab.textContent = band < 100 ? dayLabel(r.day).split(',')[0] + ' ' + r.day.slice(8).replace(/^0/, '') : dayLabel(r.day); axis.append(lab);
       const hit = svg('rect', { class: 'hit', x: cx - band / 2, y: m.t, width: band, height: ih, rx: 8 });
-      hit.addEventListener('pointermove', e => showTip(e, dayLabel(r.day) + (r.future ? ' (to come)' : ''), SERIES.map(([k, label, color]) => [label.split(' (')[0], r[k], color])));
+      hit.addEventListener('pointermove', e => showTip(e, dayLabel(r.day) + (r.future ? ' (to come)' : ''), SERIES.map(([k, label, color]) => [label, r[k], color])));
       hit.addEventListener('pointerleave', hideTip);
       root.append(g, hit);
     });
@@ -144,17 +144,17 @@
   function funnel(d) {
     const c = d.counts;
     const steps = [
-      ['Opened it', 'unique visitors', d.visitors],
-      ['Searched for a trip', 'picked a city, time or mood', c.searches || 0],
-      ['Shared a trip or plan', 'WhatsApp, story, link', c.shares || 0],
-      ['A friend opened it', 'from a shared link', (c.invites_opened || 0) + (c.group_invites_opened || 0)],
-      ['Said yes', '"I\'m in", or swiped in a group plan', (c.im_in || 0) + (c.group_joined || 0)],
+      ['Opened it', '', d.visitors],
+      ['Searched', '', c.searches || 0],
+      ['Shared', '', c.shares || 0],
+      ['A friend opened it', '', (c.invites_opened || 0) + (c.group_invites_opened || 0)],
+      ['Said yes', '', (c.im_in || 0) + (c.group_joined || 0)],
     ];
     const top = Math.max(1, steps[0][2]);
     $('#funnel').replaceChildren(...steps.map(([label, small, n], i) => el('li', {},
       el('div', { class: 'lbl' }, label, el('small', { textContent: small })),
       el('div', { class: 'bar' }, el('i', { style: `width:${Math.min(100, (n / top) * 100)}%;animation-delay:${i * 80}ms` })),
-      el('div', { class: 'num' }, el('b', { textContent: fmt(n) }), el('small', { textContent: i ? `${pct(n, steps[i - 1][2])} of the step before` : 'start' })))));
+      el('div', { class: 'num' }, el('b', { textContent: fmt(n) }), el('small', { textContent: i ? `${pct(n, steps[i - 1][2])}` : '', title: 'of the step above' })))));
   }
 
   // ---------- bento cards ----------
@@ -175,17 +175,17 @@
     const sizes = Object.entries(d.group_sizes || {}).filter(([k]) => /^\d+$/.test(k));
     const people = sizes.reduce((s, [k, n]) => s + k * n, 0), plans = sizes.reduce((s, [, n]) => s + n, 0);
     $('#bento').replaceChildren(
-      card('s3', 'Leaving from', 'Trip searches by home city', rows(d.city, cityName, { limit: 8 })),
-      card('s3', 'Mood', 'What people asked for', rows(d.vibe, vibeName, { sea: true, limit: 7 })),
-      card('s2', 'Most shared trips', 'Shares and story images per place', rows(pick('shared'), placeName)),
-      card('s2 hl', 'Hostel clicks', 'Taps on "goSTOPS has a hostel here"',
-        el('div', { class: 'big' }, el('div', {}, el('b', { textContent: fmt(c.hostel) }), el('span', { textContent: 'clicks to gostops.com' }))),
-        rows(pick('hostel'), placeName, { limit: 5 })),
-      card('s2', 'Group plans', 'Swipe with friends; the votes travel in the link',
+      card('s3', 'Leaving from', 'Searches by city', rows(d.city, cityName, { limit: 4 })),
+      card('s3', 'Mood', 'What they asked for', rows(d.vibe, vibeName, { sea: true, limit: 4 })),
+      card('s2', 'Most shared', 'Shares per trip', rows(pick('shared'), placeName, { limit: 4 })),
+      card('s2 hl', 'Hostel clicks', 'To gostops.com',
+        el('div', { class: 'big' }, el('div', {}, el('b', { textContent: fmt(c.hostel) }), el('span', { textContent: 'clicks' }))),
+        rows(pick('hostel'), placeName, { limit: 3 })),
+      card('s2', 'Group plans', 'Swipe with friends',
         el('div', { class: 'big' },
           el('div', {}, el('b', { textContent: fmt(c.group_started) }), el('span', { textContent: 'started' })),
-          el('div', {}, el('b', { textContent: fmt(c.group_joined) }), el('span', { textContent: 'friends joined' })),
-          el('div', {}, el('b', { textContent: plans ? (people / plans).toFixed(1) : '–' }), el('span', { textContent: 'people per plan' })))),
+          el('div', {}, el('b', { textContent: fmt(c.group_joined) }), el('span', { textContent: 'joined' })),
+          el('div', {}, el('b', { textContent: plans ? (people / plans).toFixed(1) : '–' }), el('span', { textContent: 'per plan' })))),
     );
     document.querySelectorAll('.card').forEach(n => n.addEventListener('pointermove', e => {
       const r = n.getBoundingClientRect();
