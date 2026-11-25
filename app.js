@@ -248,7 +248,7 @@
     $('#ask').addEventListener('submit', e => { e.preventDefault(); run(true); });
   }
 
-  function run(scroll) {
+  function run(scroll, auto) {
     ranked = rank({ ...state, shuffle: state.vibe === 'any' }); shown = 0;
     const box = $('#results'); box.replaceChildren();
     const fromName = CITIES[state.from];
@@ -257,7 +257,7 @@
       el('p', { class: 'sub', textContent: 'Sorted by mood, season, budget and distance. The weather is the live forecast for this Saturday and Sunday.' }));
     if (!ranked.length) box.append(el('p', { class: 'empty', textContent: `Nothing in my list fits ${dayText} from ${fromName} yet. Try more days, or tell me a place to add.` }));
     else showMore();
-    track(`search/${state.from}/${state.days}/${state.vibe}`);
+    if (!auto) track(`search/${state.from}/${state.days}/${state.vibe}`); // the picks shown on load are not a search
     if (scroll) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -323,7 +323,7 @@
     if (openTripInvite(q)) { setMode('find', false); return; }
     if (location.hash === '#group') { setMode('group', false); return; }
     setMode('find', false);
-    run(false); // show picks straight away; nobody should have to work before seeing something useful
+    run(false, true); // show picks straight away; nobody should have to work before seeing something useful
   };
 
   Object.assign(KC, { el, store, track, toast, copy, hours, rupees, COST_TEXT, MONTHS, CITIES, PLACES, BASE, byId,
