@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-25T20:37:22+00:00",
+ "updated": "2026-11-25T22:13:22+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 35,
- "events": 19,
+ "visitors": 37,
+ "events": 21,
  "daily": [
   {
    "day": "2026-11-24",
@@ -17,8 +17,8 @@
   },
   {
    "day": "2026-11-26",
-   "visitors": 12,
-   "events": 7
+   "visitors": 14,
+   "events": 9
   }
  ],
  "counts": {
@@ -26,7 +26,8 @@
   "tab_group": 3,
   "best_open": 4,
   "searches": 5,
-  "split_open": 1,
+  "group_started": 1,
+  "split_open": 2,
   "hostel": 1,
   "shares": 2,
   "share_native": 1,
@@ -44,7 +45,9 @@
   "2": 4,
   "3": 1
  },
- "group_city": {},
+ "group_city": {
+  "blr": 1
+ },
  "group_sizes": {},
  "places": {
   "hampi": {
