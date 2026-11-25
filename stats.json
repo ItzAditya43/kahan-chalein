@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-25T19:32:22+00:00",
+ "updated": "2026-11-25T19:43:22+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 28,
- "events": 15,
+ "visitors": 30,
+ "events": 16,
  "daily": [
   {
    "day": "2026-11-24",
@@ -17,8 +17,8 @@
   },
   {
    "day": "2026-11-26",
-   "visitors": 5,
-   "events": 3
+   "visitors": 7,
+   "events": 4
   }
  ],
  "counts": {
@@ -26,6 +26,7 @@
   "tab_find": 2,
   "tab_group": 2,
   "searches": 5,
+  "split_open": 1,
   "hostel": 1,
   "shares": 2,
   "share_native": 1,
