@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-27T08:05:22+00:00",
+ "updated": "2026-11-27T10:05:28+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 45,
- "events": 26,
+ "visitors": 53,
+ "events": 33,
  "daily": [
   {
    "day": "2026-11-24",
@@ -22,33 +22,37 @@
   },
   {
    "day": "2026-11-27",
-   "visitors": 8,
-   "events": 5
+   "visitors": 16,
+   "events": 12
   }
  ],
  "counts": {
   "tab_find": 4,
   "tab_group": 4,
-  "searches": 7,
+  "searches": 12,
   "best_open": 4,
+  "split_open": 3,
+  "near_me": 1,
   "shares": 3,
   "share_best": 1,
   "group_started": 1,
-  "split_open": 2,
   "hostel": 1,
   "share_native": 1,
   "share_story": 1
  },
  "city": {
-  "blr": 5,
-  "del": 2
+  "blr": 7,
+  "del": 4,
+  "amd": 1
  },
  "vibe": {
-  "any": 6,
-  "beach": 1
+  "any": 7,
+  "beach": 2,
+  "mountains": 3
  },
  "length": {
   "2": 6,
+  "1": 5,
   "3": 1
  },
  "group_city": {
