@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-26T18:06:22+00:00",
+ "updated": "2026-11-27T05:15:22+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 37,
- "events": 21,
+ "visitors": 39,
+ "events": 22,
  "daily": [
   {
    "day": "2026-11-24",
@@ -22,15 +22,15 @@
   },
   {
    "day": "2026-11-27",
-   "visitors": 0,
-   "events": 0
+   "visitors": 2,
+   "events": 1
   }
  ],
  "counts": {
   "tab_find": 3,
   "tab_group": 3,
+  "searches": 6,
   "best_open": 4,
-  "searches": 5,
   "group_started": 1,
   "split_open": 2,
   "hostel": 1,
@@ -39,15 +39,15 @@
   "share_story": 1
  },
  "city": {
-  "blr": 3,
+  "blr": 4,
   "del": 2
  },
  "vibe": {
-  "any": 4,
+  "any": 5,
   "beach": 1
  },
  "length": {
-  "2": 4,
+  "2": 5,
   "3": 1
  },
  "group_city": {
