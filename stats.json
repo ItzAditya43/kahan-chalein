@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-27T19:12:22+00:00",
+ "updated": "2026-11-27T19:22:27+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 55,
- "events": 33,
+ "visitors": 57,
+ "events": 35,
  "daily": [
   {
    "day": "2026-11-24",
@@ -27,13 +27,13 @@
   },
   {
    "day": "2026-11-28",
-   "visitors": 1,
-   "events": 0
+   "visitors": 3,
+   "events": 2
   }
  ],
  "counts": {
-  "tab_find": 4,
-  "tab_group": 4,
+  "tab_find": 5,
+  "tab_group": 5,
   "searches": 12,
   "best_open": 4,
   "split_open": 3,
