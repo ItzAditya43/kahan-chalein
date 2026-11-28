@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-28T04:47:13+00:00",
+ "updated": "2026-11-28T11:41:35+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 66,
- "events": 41,
+ "visitors": 69,
+ "events": 43,
  "daily": [
   {
    "day": "2026-11-24",
@@ -27,15 +27,16 @@
   },
   {
    "day": "2026-11-28",
-   "visitors": 12,
-   "events": 8
+   "visitors": 15,
+   "events": 10
   }
  ],
  "counts": {
   "tab_find": 6,
   "tab_group": 6,
-  "searches": 13,
+  "searches": 14,
   "best_open": 5,
+  "more": 1,
   "hostel": 2,
   "split_open": 4,
   "near_me": 1,
@@ -47,16 +48,16 @@
  },
  "city": {
   "blr": 7,
-  "amd": 2,
-  "del": 4
+  "del": 5,
+  "amd": 2
  },
  "vibe": {
-  "any": 8,
+  "any": 9,
   "beach": 2,
   "mountains": 3
  },
  "length": {
-  "2": 7,
+  "2": 8,
   "1": 5,
   "3": 1
  },
