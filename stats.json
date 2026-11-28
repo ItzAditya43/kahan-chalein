@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-27T19:22:27+00:00",
+ "updated": "2026-11-28T02:46:22+00:00",
  "since": "2026-11-24",
  "deadline": "2026-11-27T23:59:00+05:30",
- "visitors": 57,
- "events": 35,
+ "visitors": 62,
+ "events": 39,
  "daily": [
   {
    "day": "2026-11-24",
@@ -27,36 +27,36 @@
   },
   {
    "day": "2026-11-28",
-   "visitors": 3,
-   "events": 2
+   "visitors": 8,
+   "events": 6
   }
  ],
  "counts": {
   "tab_find": 5,
   "tab_group": 5,
-  "searches": 12,
-  "best_open": 4,
-  "split_open": 3,
+  "searches": 13,
+  "best_open": 5,
+  "hostel": 2,
+  "split_open": 4,
   "near_me": 1,
   "shares": 3,
   "share_best": 1,
   "group_started": 1,
-  "hostel": 1,
   "share_native": 1,
   "share_story": 1
  },
  "city": {
   "blr": 7,
-  "del": 4,
-  "amd": 1
+  "amd": 2,
+  "del": 4
  },
  "vibe": {
-  "any": 7,
+  "any": 8,
   "beach": 2,
   "mountains": 3
  },
  "length": {
-  "2": 6,
+  "2": 7,
   "1": 5,
   "3": 1
  },
@@ -67,6 +67,10 @@
  "places": {
   "hampi": {
    "best_open": 2
+  },
+  "udaipur": {
+   "hostel": 1,
+   "best_open": 1
   },
   "gandikota": {
    "best_open": 1
